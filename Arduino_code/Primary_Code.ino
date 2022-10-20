@@ -71,16 +71,16 @@ void loop() {
   digitalWrite(8,1); // Turns on the right motor
   digitalWrite (transistor, HIGH); //Turns on right transistor
 
-  //If statement that checks if the sensors are less than a certain value
+  //If statement that checks if the sensors are less than a certain value (right sensor)
  if (distanceR < 10) {
  digitalWrite(8,0);
- delay(3000); //Will delay for 4 seconds
+ delay(3000); //Will delay for 3 seconds
  digitalWrite(8,1); 
 }
-
+//If statement for left sensors
 if (distanceL < 10) {
  digitalWrite(13,0);
- delay(3000); //Will delay for 4 seconds
+ delay(3000); //Will delay for 3 seconds
  digitalWrite(13,1); 
 }
 
