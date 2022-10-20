@@ -66,8 +66,7 @@ void loop() {
 
     // Left Wheel
   digitalWrite(13,1); // Turns on the left motor
-  digitalWrite (transistorL, HIGH); //Turns on transistor left which is required for the left motor to move HEY WE SHOULD CHECK VOLTAGE SO SHIT DOESNT GET FRIED
-
+  digitalWrite (transistorL, HIGH); //Turns on transistor left which is required for the left motor to move 
     // Right Wheel 
   digitalWrite(8,1); // Turns on the right motor
   digitalWrite (transistor, HIGH); //Turns on right transistor
