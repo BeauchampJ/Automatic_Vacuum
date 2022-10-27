@@ -1,13 +1,15 @@
 
 // defines pins numbers
-const int trigPinL = 9; //Left sensor
-const int echoPinL = 10;//Left sensor
-const int trigPinR= 12;//Right sensor
-const int echoPinR= 11;//Right sensor
-const int transistorL = 2;
-const int transistorR = 1;
+const int trigPinR = 1; //Left sensor
+const int echoPinR = 2;//Left sensor
+const int trigPinL= 4;//Right sensor
+const int echoPinL= 3;//Right sensor
 
-
+//Defines end wheel pins. A isn't included in our setup
+#define A1 5  // Motor A pins
+#define A2 6
+#define B1 10 // Motor B pins
+#define B2 11
 
 // defines variables
 long durationL;
@@ -16,6 +18,7 @@ long durationR;//This will be displaying the distances for the right sensor (loo
 int distanceR; //This will be displaying the distances for the right sensor (looking from the back)
 
 //Setup code for arduino
+
 void setup() {
   pinMode(trigPinL, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPinL, INPUT); // Sets the echoPin as an Input
@@ -23,14 +26,26 @@ void setup() {
   pinMode(trigPinR, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPinR, INPUT); // Sets the echoPin as an Input
   
-  pinMode(13, OUTPUT); //This section defines the left motor transistor which is used for left motor
-  pinMode (transistorL, OUTPUT);
-  pinMode(8, OUTPUT); //This sets up the RIGHT wheel
-  pinMode (transistor, OUTPUT);//Sets up our Right transistor
+   
+  // Sets up the pins for our super cool wheels
+ pinMode(A1, OUTPUT);
+  pinMode(A2, OUTPUT);
+  pinMode(B1, OUTPUT);
+  pinMode(B2, OUTPUT);
+
+  digitalWrite(A1, LOW);
+  digitalWrite(A2, LOW);
+  digitalWrite(B1, LOW);
+  digitalWrite(B2, LOW);
+  
   
 }
+// This is used to set our input to 0, this will change inside of the loop
+int  input = 0;
 //The loop that gets executed
 void loop() {
+  // Starts forward movement
+  forward();
   
   // Left sensor?
   // Clears the trigPin
@@ -64,25 +79,67 @@ void loop() {
   Serial.print("Distance R: ");
   Serial.println(distanceR);
 
-    // Left Wheel
-  digitalWrite(13,1); // Turns on the left motor
-  digitalWrite (transistorL, HIGH); //Turns on transistor left which is required for the left motor to move 
-    // Right Wheel 
-  digitalWrite(8,1); // Turns on the right motor
-  digitalWrite (transistor, HIGH); //Turns on right transistor
+// This section is for checking if the distances are a certain length and then having the car do things as a response
+if (distanceR < 10) {
+  RightPivot();
 
-  //If statement that checks if the sensors are less than a certain value (right sensor)
- if (distanceR < 10) {
- digitalWrite(8,0);
- delay(3000); //Will delay for 3 seconds
- digitalWrite(8,1); 
 }
-//If statement for left sensors
 if (distanceL < 10) {
- digitalWrite(13,0);
- delay(3000); //Will delay for 3 seconds
- digitalWrite(13,1); 
+  LeftPivot();
 }
 
+delay(200);
+  
+}
 
+// These are callable functions that get used within our loop code
+void forward() {          //function of forward 
+  analogWrite(A1, 255);
+  analogWrite(A2, 0);
+  analogWrite(B1, 255);
+  analogWrite(B2, 0);
+}
+
+void backward() {         //function of backward
+  analogWrite(A1, 0);
+  analogWrite(A2, 210);
+  analogWrite(B1, 0);
+  analogWrite(B2, 210);
+}
+
+void Stop() {              //function of stop
+  digitalWrite(A1, LOW);
+  digitalWrite(A2, LOW);
+  digitalWrite(B1, LOW);
+  digitalWrite(B2, LOW);
+}
+
+void LeftPivot() {
+Stop();
+delay(300);
+backward();
+delay(4000);
+Stop();
+delay(300);
+analogWrite(B1, 0);
+analogWrite(B2, 210);
+analogWrite(A1, 255);
+analogWrite(A2, 0);
+delay(2000);
+Stop();
+}
+
+void RightPivot() {
+Stop();
+delay(300);
+backward();
+delay(4000);
+Stop();
+delay(300);
+analogWrite(A1, 0);
+analogWrite(A2, 210);
+analogWrite(B1, 255);
+analogWrite(B2, 0);
+delay(2000);
+Stop();
 }
