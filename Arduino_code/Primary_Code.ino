@@ -3,13 +3,17 @@
 const int trigPinR = 1; //Left sensor
 const int echoPinR = 2;//Left sensor
 const int trigPinL= 4;//Right sensor
-const int echoPinL= 3;//Right sensor
-
+const int echoPinL= 8;//Right sensor
+int PowerSwitch= A0; //Pin that reads if power switch on
+int PowerValue;
+float volt;
 //Defines end wheel pins. A isn't included in our setup
 #define A1 5  // Motor A pins
 #define A2 6
 #define B1 10 // Motor B pins
 #define B2 11
+#define C1 3 // Motor C pins (brush)
+#define C2 9
 
 // defines variables
 long durationL;
@@ -32,11 +36,16 @@ void setup() {
   pinMode(A2, OUTPUT);
   pinMode(B1, OUTPUT);
   pinMode(B2, OUTPUT);
+  pinMode(C1, OUTPUT);
+  pinMode(C2, OUTPUT);
 
   digitalWrite(A1, LOW);
   digitalWrite(A2, LOW);
   digitalWrite(B1, LOW);
   digitalWrite(B2, LOW);
+  digitalWrite(C1, LOW);
+  digitalWrite(C2, LOW);
+
   
   
 }
@@ -44,9 +53,20 @@ void setup() {
 int  input = 0;
 //The loop that gets executed
 void loop() {
+  
+PowerValue = analogRead(PowerSwitch);
+
+volt = PowerValue * 5.0/1023.0;
+
+while (volt>2.5) {
   // Starts forward movement
   forward();
   
+  // Turns brush motor on
+  analogWrite(C1, 255);
+  analogWrite(C2, 0);
+
+
   // Left sensor?
   // Clears the trigPin
   digitalWrite(trigPinL, LOW);
@@ -80,17 +100,20 @@ void loop() {
   Serial.println(distanceR);
 
 // This section is for checking if the distances are a certain length and then having the car do things as a response
-if (distanceR < 10) {
+if (distanceR < 5) {
   RightPivot();
 
 }
-if (distanceL < 10) {
+if (distanceL < 5) {
   LeftPivot();
 }
 
 delay(200);
-  
-}
+PowerValue = analogRead(PowerSwitch);
+
+volt = PowerValue * 5.0/1023.0;
+ }//end while loop
+}//end full loop
 
 // These are callable functions that get used within our loop code
 void forward() {          //function of forward 
