@@ -4,6 +4,7 @@ This contains all of the arduino code used for this project including the actual
 ## Contents:
 - Primary Code: This file is the primary code used by the arduino during actual opperation. It includes the setup variables and all sensing information
 ## Future Changes:
-- [ ] Test to see if soldering works well in conjunction with this code
+- [x] Test to see if soldering works well in conjunction with this code
 - [ ] Update this page to include breadboard breakouts
+- [x] Power switch code
 - [x] Add code to have robot turn around
