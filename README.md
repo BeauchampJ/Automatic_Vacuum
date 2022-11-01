@@ -7,4 +7,4 @@ For the Mech 202, teams were created with the goal of building a vacuum from scr
 - Arduino Code: Used to program the arduinos and get the vacuum to actually function and move
 
 ## Please Note:
-As of October 18th, 2022 this is a work in progress and there is still lots of time to go before competition day
+As of November 1st, 2022 this is a work in progress and there is still lots of time to go before competition day. More details about physically constructing device will be added in the future.
