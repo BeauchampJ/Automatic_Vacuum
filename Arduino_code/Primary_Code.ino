@@ -112,7 +112,7 @@ delay(200);
 PowerValue = analogRead(PowerSwitch);
 
 volt = PowerValue * 5.0/1023.0;
- 
+ //end while loop
 }//end full loop
 
 // These are callable functions that get used within our loop code
