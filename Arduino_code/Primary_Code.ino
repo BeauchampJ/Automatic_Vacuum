@@ -7,6 +7,8 @@ const int echoPinL= 8;//Right sensor
 int PowerSwitch= A0; //Pin that reads if power switch on
 int PowerValue;
 float volt;
+int index; //Indexing variable which keeps track of how many loop iterations occur
+
 //Defines end wheel pins. A isn't included in our setup
 #define A1 5  // Motor A pins
 #define A2 6
@@ -29,7 +31,7 @@ void setup() {
   Serial.begin(9600); // Starts the serial communication
   pinMode(trigPinR, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPinR, INPUT); // Sets the echoPin as an Input
-  
+  index = 1;
    
   // Sets up the pins for our super cool wheels
  pinMode(A1, OUTPUT);
@@ -54,9 +56,6 @@ int  input = 0;
 //The loop that gets executed
 void loop() {
   
-PowerValue = analogRead(PowerSwitch);
-
-volt = PowerValue * 5.0/1023.0;
 
 
   // Starts forward movement
@@ -100,19 +99,25 @@ volt = PowerValue * 5.0/1023.0;
   Serial.println(distanceR);
 
 // This section is for checking if the distances are a certain length and then having the car do things as a response
-if (distanceR < 5) {
+if (distanceR < 10) {
   RightPivot();
 
 }
-if (distanceL < 5) {
+if (distanceL < 10) {
   LeftPivot();
 }
 
 delay(200);
-PowerValue = analogRead(PowerSwitch);
+index = index + 1;
 
-volt = PowerValue * 5.0/1023.0;
- //end while loop
+if (isdigit(index/5)) {
+  backward();
+  delay(1000);
+
+}
+
+
+
 }//end full loop
 
 // These are callable functions that get used within our loop code
@@ -141,14 +146,14 @@ void LeftPivot() {
 Stop();
 delay(300);
 backward();
-delay(4000);
+delay(2000);
 Stop();
 delay(300);
 analogWrite(B1, 0);
 analogWrite(B2, 210);
 analogWrite(A1, 255);
 analogWrite(A2, 0);
-delay(2000);
+delay(1000);
 Stop();
 }
 
@@ -156,13 +161,13 @@ void RightPivot() {
 Stop();
 delay(300);
 backward();
-delay(4000);
+delay(2000);
 Stop();
 delay(300);
 analogWrite(A1, 0);
 analogWrite(A2, 210);
 analogWrite(B1, 255);
 analogWrite(B2, 0);
-delay(2000);
+delay(1000);
 Stop();
 }
