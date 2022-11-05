@@ -1,3 +1,12 @@
+/*
+
+Primary Vacuum Code
+
+Created by Jacob Beauchamp for Colorado State Universities MECH 202 Class Compitition in the Fall 2022 Semester
+
+For more information about physical hardware and documentation on this project, please reference my Github (https://github.com/BeauchampJ)
+
+*/
 
 // defines pins numbers
 const int trigPinR = 1; //Left sensor
@@ -24,17 +33,16 @@ long durationR;//This will be displaying the distances for the right sensor (loo
 int distanceR; //This will be displaying the distances for the right sensor (looking from the back)
 
 //Setup code for arduino
-
 void setup() {
   pinMode(trigPinL, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPinL, INPUT); // Sets the echoPin as an Input
   Serial.begin(9600); // Starts the serial communication
   pinMode(trigPinR, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPinR, INPUT); // Sets the echoPin as an Input
-  index = 1;
+  index = 1; // Index variable which keeps track of iterations during loop
    
   // Sets up the pins for our super cool wheels
- pinMode(A1, OUTPUT);
+  pinMode(A1, OUTPUT);
   pinMode(A2, OUTPUT);
   pinMode(B1, OUTPUT);
   pinMode(B2, OUTPUT);
@@ -49,10 +57,10 @@ void setup() {
   digitalWrite(C2, LOW);
 
   
-  
 }
 // This is used to set our input to 0, this will change inside of the loop
 int  input = 0;
+
 //The loop that gets executed
 void loop() {
   
@@ -60,13 +68,14 @@ void loop() {
 
   // Starts forward movement
   forward();
-  
+  delay(500); //This prevents the Vacuum from auto backing up on start
+
   // Turns brush motor on
   analogWrite(C1, 255);
   analogWrite(C2, 0);
 
 
-  // Left sensor?
+ 
   // Clears the trigPin
   digitalWrite(trigPinL, LOW);
   delayMicroseconds(2);
@@ -82,7 +91,7 @@ void loop() {
   Serial.print("Distance L: ");
   Serial.println(distanceL);
 
-    // Left sensor?
+   
   // Clears the trigPin
   digitalWrite(trigPinR, LOW);
   delayMicroseconds(2);
@@ -108,11 +117,13 @@ if (distanceL < 10) {
 }
 
 delay(200);
-index = index + 1;
 
-if (isdigit(index/5)) {
+index = index + 1; //Keep track of iterations
+
+//Auto implement backup in case the robot gets jammed and sensors aren't functioning during competition
+if (isDigit(index/5)) {
   backward();
-  delay(1000);
+  delay(1000); 
 
 }
 
