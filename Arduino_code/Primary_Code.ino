@@ -124,6 +124,8 @@ backward(); //Safety backwards to prevent buildup
 
 delay(1500);
 
+adjust(); //slight angle adjustment
+
 
 }//end full loop
 
@@ -177,4 +179,16 @@ analogWrite(B1, 255);
 analogWrite(B2, 0);
 delay(1000);
 Stop();
+}
+
+void adjust() {
+  Stop();
+  delay(250);
+  analogWrite(A1, 0);
+  analogWrite(A2, 210);
+  analogWrite(B1, 255);
+  analogWrite(B2, 0);
+  delay(250);
+  Stop();
+
 }
