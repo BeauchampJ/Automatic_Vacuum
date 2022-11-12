@@ -133,9 +133,9 @@ if (isDigit(index/5)) {
 
 // These are callable functions that get used within our loop code
 void forward() {          //function of forward 
-  analogWrite(A1, 255);
+  analogWrite(A1, 150);
   analogWrite(A2, 0);
-  analogWrite(B1, 255);
+  analogWrite(B1, 150);
   analogWrite(B2, 0);
 }
 
