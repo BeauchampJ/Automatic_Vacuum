@@ -56,6 +56,7 @@ void setup() {
   digitalWrite(C1, LOW);
   digitalWrite(C2, LOW);
 
+
   
 }
 // This is used to set our input to 0, this will change inside of the loop
@@ -116,34 +117,29 @@ if (distanceL < 10) {
   LeftPivot();
 }
 
-delay(200);
 
-index = index + 1; //Keep track of iterations
+delay(3000);
 
-//Auto implement backup in case the robot gets jammed and sensors aren't functioning during competition
-if (isDigit(index/5)) {
-  backward();
-  delay(1000); 
+backward(); //Safety backwards to prevent buildup
 
-}
-
+delay(1500);
 
 
 }//end full loop
 
 // These are callable functions that get used within our loop code
 void forward() {          //function of forward 
-  analogWrite(A1, 150);
+  analogWrite(A1, 200); //255 is max
   analogWrite(A2, 0);
-  analogWrite(B1, 150);
+  analogWrite(B1, 200);
   analogWrite(B2, 0);
 }
 
 void backward() {         //function of backward
   analogWrite(A1, 0);
-  analogWrite(A2, 210);
+  analogWrite(A2, 200);
   analogWrite(B1, 0);
-  analogWrite(B2, 210);
+  analogWrite(B2, 200);
 }
 
 void Stop() {              //function of stop
