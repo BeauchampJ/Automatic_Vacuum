@@ -135,6 +135,9 @@ void forward() {          //function of forward
   analogWrite(A2, 0);
   analogWrite(B1, 200);
   analogWrite(B2, 0);
+  analogWrite(C1, 255);
+  analogWrite(C2, 0);
+  // Full steam ahead
 }
 
 void backward() {         //function of backward
@@ -142,6 +145,8 @@ void backward() {         //function of backward
   analogWrite(A2, 200);
   analogWrite(B1, 0);
   analogWrite(B2, 200);
+  analogWrite(C1, 0);
+  analogWrite(C2, 150); //Used to possibly unjam the brush while in reload
 }
 
 void Stop() {              //function of stop
