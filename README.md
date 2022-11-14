@@ -11,4 +11,4 @@ For the Mech 202, teams were created with the goal of building a vacuum from scr
 The competition was held on November 13th, 2022. The vacuum created placed 4th out of 17 with a loss in the final round by ~20 grams of sand and debris.
 
 ## Please note:
-The package contents for this vacuum is still being created and finalized. Until then, the project is still considered a work and progress and more diagrams will be added as the group prepares to present on the results.
+The package contents for this vacuum are still being created and finalized. Until then, the project is still considered a work in progress. More diagrams and information about how to assemble and recreate the vacuum will be added as the group prepares to present on the results.
