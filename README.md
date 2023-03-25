@@ -1,6 +1,6 @@
 # Automatic_Vacuum
 ## Description:
-For the Mech 202, teams were created with the goal of building a vacuum from scratch that can run by the push of a button. The vacuum should be capable of picking up a variety of debris, including sand, washers, nails and marbles. The requirements are highlighted in the project description document.
+For the Mech 202 class, teams were created with the goal of building a vacuum from scratch that can run by the push of a button. The vacuum should be capable of picking up a variety of debris; including sand, washers, nails and marbles. The requirements are highlighted in the project description document.
 
 ## Package Contents:
 - G-code: used to print off the designed parts that were ultimately printed for the project
